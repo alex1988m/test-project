@@ -1,58 +1,14 @@
 version: '3'
-
 services:
-  # mobile:
-  #   container_name: mobile
-  #   restart: unless-stopped
-  #   build: ./mobile
-  #   command: npm start
-  #   ports:
-  #     - 4000:4000
-  #   environment:
-  #     - PORT=4000
-  #     - DEVICE_ID=1619d8990312
-  #     - RESET_TIMEOUT=3000
-  #   # privileged: true
-  #   network_mode: host
-  #   volumes:
-  #     - /dev/bus/usb:/dev/bus/usb
-  # proxy:
-  #   container_name: proxy
-  #   restart: unless-stopped
-  #   build: ./proxy
-  #   command: npm start
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     - PORT=3000
-  #     - DEBUG=false
-  #   depends_on:
-  #     - pg
-  api-low:
-    container_name: api-low
-    restart: unless-stopped
-    build: ./api
+  controller: 
+    container_name: controller
+    restart: unless-unsopped
+    build: ./controller
     command: npm start
     environment:
       - REQUESTS_TO_RESTART=1400
-      - DOCKER=true
-      - TYPE=low
       - KEYWORD="bmw new"
-      - INTERVAL=40000
-      - DEBUG=false
-    depends_on:
-      - pg
-  api-high:
-    container_name: api-high
-    restart: unless-stopped
-    build: ./api
-    command: npm start
-    environment:
-      - REQUESTS_TO_RESTART=1400
-      - DOCKER=true
-      - TYPE=high
-      - KEYWORD=bmw
-      - INTERVAL=40000
+      - INTERVAL=5000
       - DEBUG=false
     depends_on:
       - pg
