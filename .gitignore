@@ -38,11 +38,12 @@ bower_components
 build/Release
 .vscode
 # Dependency directories
-node_modules/
+**/node_modules/
 jspm_packages/
-
+**/build
 # TypeScript v1 declaration files
 typings/
+**/package-lock.json
 
 # TypeScript cache
 *.tsbuildinfo
