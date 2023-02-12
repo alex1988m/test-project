@@ -3,5 +3,5 @@ import { SearchResult } from '../../g-trends/types/SearchResult';
 import { selectAll } from '../queries/select-all';
 
 export interface IDB {
-    insertRows(data: SearchResult[]): Promise<void>;
+    insertRows(data: SearchResult[], type: 'low' | 'high'): Promise<void>;
 }

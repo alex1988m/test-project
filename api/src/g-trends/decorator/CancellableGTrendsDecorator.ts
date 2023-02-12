@@ -1,16 +1,16 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { cancellablePromise } from '../../utils/cancellable-promise';
-import { IGTApi } from '../types/IGTApi';
+import { IGTApi } from '../api/IGTApi';
 
 export class CancellableDecorator implements IGTApi {
     private CANCEL_INTERVAL = process.env.INTERVAL - 500;
     constructor (private subject: IGTApi) { }
 
-    async get(agent: HttpsProxyAgent, keyword: string): Promise<string> {
+    async get(keyword: string): Promise<string> {
         const cancellable = cancellablePromise(
             (resolve, reject) => {
                 this.subject
-                    .get(agent, keyword)
+                    .get(keyword)
                     .then(
                         res => {
                             resolve(res);

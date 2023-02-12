@@ -1,15 +1,15 @@
 version: '3'
 services:
-  controller: 
-    container_name: controller
-    restart: unless-unsopped
-    build: ./controller
+  api: 
+    container_name: api
+    restart: unless-stopped
+    build: ./api
     command: npm start
     environment:
-      - REQUESTS_TO_RESTART=1400
+      - REQUESTS_TO_RESTART=4
       - KEYWORD="bmw new"
       - INTERVAL=5000
-      - DEBUG=false
+      - DEBUG=true
     depends_on:
       - pg
   pg:

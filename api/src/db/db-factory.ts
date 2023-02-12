@@ -10,9 +10,13 @@ export default class DatabaseFactory {
     static async getInstance() {
         const pool = new Pool(defaultConfig);
         DatabaseFactory.initPool(pool);
-        await pool.query(createTable(process.env.TYPE)).catch(console.error);
-        const db = new Database(pool, process.env.TYPE, process.env.KEYWORD);
-        return db;
+        await DatabaseFactory.createTables(pool);
+        return new Database(pool);
+    }
+
+    private static async createTables(pool: Pool) {
+        await pool.query(createTable('low'));
+        await pool.query(createTable('high'));
     }
 
     private static initPool(pool: Pool) {

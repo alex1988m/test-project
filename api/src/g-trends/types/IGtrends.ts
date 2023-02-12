@@ -1,4 +1,4 @@
-import { IGTApi } from './IGTApi';
+import { IGTApi } from '../api/IGTApi';
 import { SearchResult } from './SearchResult';
 
 export interface IGtrends {
