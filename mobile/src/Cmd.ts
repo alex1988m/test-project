@@ -50,6 +50,7 @@ export class Cmd implements ICmdCommands {
                 this.logger.info('press button');
                 await this.executeCommand(this.PRESS_BUTTON);
 
+                await delay(this.RESET_TIMEOUT);
 
                 this.logger.info('press home');
                 await this.executeCommand(this.PRESS_HOME);
