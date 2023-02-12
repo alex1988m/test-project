@@ -19,7 +19,7 @@ async function main() {
     const client: IClient = new ClientFacade(services);
 
     logger.info('start application...');
-    client.start();
+    await client.start();
 }
 
 main().catch(logger.error);

@@ -1,3 +1,3 @@
 export interface IClient {
-    start(): void;
+    start(): Promise<void>;
 }

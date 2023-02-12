@@ -4,6 +4,7 @@ import { LoggerFactory } from '../logger/LoggerFactory';
 import { IClient } from './IClient';
 import axios from 'axios';
 import { IService } from '../g-trends/service/IService';
+import { delay } from '../utils/delay';
 
 export class ClientFacade implements IClient {
     private requestCount = 0;
@@ -13,11 +14,15 @@ export class ClientFacade implements IClient {
         private services: IService[],
     ) { }
 
-    start(): void {
-        setInterval(
-            async () => await this.getKeywordInfo(),
-            +process.env.INTERVAL || 20000
-        );
+    async start(): Promise<void> {
+        while (true) {
+            await this.getKeywordInfo();
+            await delay(+process.env.INTERVAL);
+        }
+        // setInterval(
+        //     async () => await this.getKeywordInfo(),
+        //     +process.env.INTERVAL || 20000
+        // );
     }
 
     private async getKeywordInfo(): Promise<void> {

@@ -2,7 +2,7 @@
   "name": "airplane",
   "version": "1.0",
   "scripts": {
-    "start": "tsc && node build/index.js"
+    "start": "npm install && tsc && node build/index.js"
   },
   "license": "MIT",
   "devDependencies": {
