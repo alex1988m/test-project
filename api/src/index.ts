@@ -16,7 +16,7 @@ async function main() {
     const services = ServicesFactory.getInstances(db);
 
     logger.info('start client');
-    const client: IClient = new ClientFacade(services);
+    const client: IClient = new ClientFacade(services, db);
 
     logger.info('start application...');
     await client.start();

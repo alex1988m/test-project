@@ -1,15 +1,22 @@
 import { Pool } from 'pg';
-import { insertData } from './queries/insert';
-import { selectAll } from './queries/select-all';
 import format from 'pg-format';
 import { insertRowsQuery } from './queries/insert-rows';
 import { SearchResult } from '../g-trends/types/SearchResult';
 import { IDB } from './types/IDB';
-import { ILogger } from '../logger/ILogger';
-import { LoggerFactory } from '../logger/LoggerFactory';
+import { getIpList } from './queries/get-ip-list';
+import { insertIp } from './queries/insert-ip';
 
 export default class Database implements IDB {
     constructor (private pool: Pool) { }
+
+    async insertIp(ip: string): Promise<void> {
+        await this.pool.query(insertIp, [ip]);
+    }
+
+    async getIpList(): Promise<string[]> {
+        const { rows } = await this.pool.query<{ address: string; }>(getIpList);
+        return rows.map(r => r.address);
+    }
 
     async insertRows(
         data: SearchResult[],
